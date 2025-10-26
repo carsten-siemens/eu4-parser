@@ -1,0 +1,87 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/src/main.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Run Test Suite",
+      "runtimeArgs": ["--test", "--experimental-test-coverage", "test/index.test.js"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Tests all",
+      "args": ["--test", "test/**/*.js"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Test package parse",
+      "args": ["--test", "test/parse/*.js"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Test package tokenize",
+      "args": ["--test", "test/tokenize/*.js"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Test class StringBuffer",
+      "args": ["--test", "test/tokenize/StringBuffer.test.js"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Test classes ...Token",
+      "args": ["--test", "test/tokenize/Token.test.js"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Test class Tokenizer",
+      "args": ["--test", "test/tokenize/Tokenizer*.js"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Test class FileUtil",
+      "args": ["--test", "test/utils/FileUtil.test.js"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Test class ParserManager",
+      "args": ["--test", "test/parse/ParserManager.test.js"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    }
+  ]
+}

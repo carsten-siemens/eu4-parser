@@ -1,0 +1,5 @@
+EU4txt
+players_countries={
+	"Player"
+	"HAB"
+}

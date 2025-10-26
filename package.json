@@ -1,0 +1,11 @@
+{
+  "type": "module",
+  "name": "eu4-parser",
+  "version": "0.0.1-SNAPSHOT",
+  "scripts": {
+    "start": "node src/main.js"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.16"
+  }
+}

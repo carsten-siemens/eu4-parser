@@ -1,0 +1,2 @@
+EU4txt
+sample={ "sample-value" }
