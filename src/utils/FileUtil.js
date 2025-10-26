@@ -1,4 +1,4 @@
-import { openSync, closeSync, readSync } from 'node:fs';
+import fs from 'fs';
 
 export class FileUtil {
 
@@ -20,14 +20,14 @@ export class FileUtil {
 
     let fd = undefined
     try {
-      fd = openSync(filePath, 'r');
+      fd = fs.openSync(filePath, 'r');
       const buffer = Buffer.alloc(byteCount);
-      const bytesRead = readSync(fd, buffer, 0, byteCount);
+      const bytesRead = fs.readSync(fd, buffer, 0, byteCount);
 
       return buffer.toString(encoding, 0, bytesRead);
     } finally {
       if (fd !== undefined)
-        closeSync(fd);
+        fs.closeSync(fd);
     } 
   }
 }

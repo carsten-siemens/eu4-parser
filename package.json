@@ -1,11 +1,23 @@
 {
-  "type": "module",
   "name": "eu4-parser",
   "version": "0.0.1-SNAPSHOT",
+  "type": "module",
+  "main": "./dist/index.cjs",
   "scripts": {
-    "start": "node src/main.js"
+    "start": "node src/main.js",
+    "build": "node build.js",
+    "link": "npm link"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
   },
   "dependencies": {
     "adm-zip": "^0.5.16"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.11"
   }
 }

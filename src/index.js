@@ -1,4 +1,4 @@
-import { ParserManager } from "./src/parse/ParserManager";
+import { ParserManager } from "./parse/ParserManager";
 
 /**
  * Parse a - zip or plain text - Europa Universali (EU4) save game file
@@ -12,6 +12,6 @@ import { ParserManager } from "./src/parse/ParserManager";
  * opttional encoding parameter shoul be left out unless you have 
  * an encoding issue.
  */
-export function parseEu4SavegameFromFile(filePath, encoding="latin1"){
-  new ParserManager().parseFile(filePath, encoding);
+export function parseEu4Savegame(filePath, encoding="latin1"){
+  return new ParserManager().parseFile(filePath, encoding);
 }

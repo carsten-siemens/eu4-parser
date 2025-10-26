@@ -1,5 +1,5 @@
 import AdmZip from "adm-zip";
-import { readFileSync } from 'node:fs';
+import fs from 'fs';
 
 import { Tokenizer } from "../tokenize/Tokenizer.js";
 import { FileUtil } from "../utils/FileUtil.js";
@@ -34,7 +34,7 @@ export class ParserManager {
 
   #parseTxtFile(filePath, encoding){
     let o = {};
-    let s = readFileSync(filePath, { encoding: encoding});
+    let s = fs.readFileSync(filePath, { encoding: encoding});
     this.#parseString(s, o);
 
     return o;
