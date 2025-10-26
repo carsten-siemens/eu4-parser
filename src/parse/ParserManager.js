@@ -1,5 +1,5 @@
-import AdmZip from "adm-zip";
 import fs from 'fs';
+import { unzipSync, strFromU8 } from 'fflate';
 
 import { Tokenizer } from "../tokenize/Tokenizer.js";
 import { FileUtil } from "../utils/FileUtil.js";
@@ -21,13 +21,16 @@ export class ParserManager {
   }
 
   #parseZipFile(filePath, encoding){
-    let o = {}
+    let o = {};
 
-    const zipEntries = new AdmZip(filePath).getEntries(); 
-    for(const zipEntry of zipEntries){
-      let s = zipEntry.getData().toString(encoding);
-      this.#parseString(s, o)
-    }
+    const zipBuffer = fs.readFileSync(filePath);
+    const zipData = unzipSync(new Uint8Array(zipBuffer));
+
+    for (const filename of Object.keys(zipData)) {
+      const file = zipData[filename];
+      let s = strFromU8(file, encoding);
+      this.#parseString(s,o);
+    }    
 
     return o;
   }

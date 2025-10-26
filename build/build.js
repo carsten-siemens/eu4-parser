@@ -6,7 +6,7 @@ await build({
   format: 'esm',
   bundle: true,
   platform: "node",
-  external: ['fs', 'adm-zip']  
+  external: ['fs']  
 });
 
 await build({
@@ -15,5 +15,5 @@ await build({
   format: 'cjs',
   bundle: true,
   platform: "node",
-  external: ['fs', 'adm-zip']  
+  external: ['fs']  
 });

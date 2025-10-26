@@ -4,11 +4,11 @@ This project includes software developed by third parties.
 
 ---
 
-Dependency: adm-zip  
-Repository: https://github.com/cthackers/adm-zip  
-License: MIT License
+Dependency: fflate  
+Repository: https://github.com/101arrowz/fflate
+MIT License
 
-Copyright (c) 2012-2023 CTHackers
+Copyright (c) 2023 Arjun Barrett
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
