@@ -16,7 +16,7 @@ npm install eu4-parser
 - Makes alle meta data and gamestate data accessible - e.g. like provinces, countries, diplomacy, armies, events
 - Can be used via ESM and CJS import
 
-## Usage example
+## Minimal usage example
 
 ESM
 ```js
