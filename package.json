@@ -1,6 +1,7 @@
 {
   "name": "eu4-parser",
-  "version": "0.1.0",
+  "version": "0.1.1",
+  "description": "Parser for Europa Universalis IV savegames",
   "type": "module",
   "main": "./dist/index.cjs",
   "scripts": {
@@ -14,6 +15,13 @@
       "require": "./dist/index.cjs"
     }
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carsten-siemens/eu4-parser.git"
+  },
+  "keywords": ["eu4", "europa-universalis-iv", "parser", "savegame"],
+  "author": "Carsten Siemens",
+   "license": "MIT",
   "dependencies": {
     "fflate": "^0.8.2"
   },
