@@ -9,7 +9,7 @@ import { Tokenizer } from '../../src/tokenize/Tokenizer.js';
 
 function checkParser(input, expectedObject) {
   let tokens = new Tokenizer().tokenize(input);
-  let o = new Parser(tokens).parse();
+  let o = new Parser().parse(tokens);
 
   assert.strictEqual(JSON.stringify(o), JSON.stringify(expectedObject));
 }

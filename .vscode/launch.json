@@ -82,6 +82,14 @@
       "args": ["--test", "test/parse/ParserManager.test.js"],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Test class TokenBuffer",
+      "args": ["--test", "test/parse/TokenBuffer.test.js"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
     }
   ]
 }

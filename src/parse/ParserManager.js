@@ -42,7 +42,7 @@ export class ParserManager {
 
   #parseString(s, o={}){
     let tokens = new Tokenizer().tokenize(s); 
-    new Parser(tokens).parse(o);
+    new Parser().parse(tokens, o);
 
     return o;
   }  
