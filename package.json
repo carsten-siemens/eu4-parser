@@ -1,11 +1,11 @@
 {
   "name": "eu4-parser",
-  "version": "0.0.1-SNAPSHOT",
+  "version": "0.0.1",
   "type": "module",
   "main": "./dist/index.cjs",
   "scripts": {
     "start": "node src/main.js",
-    "build": "node build.js",
+    "build": "node build/build.js",
     "link": "npm link"
   },
   "exports": {
