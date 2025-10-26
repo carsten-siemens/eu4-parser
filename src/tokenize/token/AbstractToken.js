@@ -29,4 +29,8 @@ export class AbstractToken {
   isSeparatorToken() {
     return this.getTokenType() == TokenType.SEPARATOR;
   }
+  
+  getPosition(){
+    return this.position;
+  }
 }

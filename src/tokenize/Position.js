@@ -3,4 +3,8 @@ export class Position {
     this.line = line;
     this.column = column;
   }
+  
+  toString() {
+    return `(${this.line}, ${this.column})`;
+  }
 }

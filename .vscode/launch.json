@@ -78,6 +78,14 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "Test class Parser",
+      "args": ["--test", "test/parse/Parser.test.js"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Test class ParserManager",
       "args": ["--test", "test/parse/ParserManager.test.js"],
       "console": "integratedTerminal",

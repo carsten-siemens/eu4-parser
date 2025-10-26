@@ -6,18 +6,58 @@ import { createSuite } from '../createSuite.js';
 import { Parser } from '../../src/parse/Parser.js';
 import { Tokenizer } from '../../src/tokenize/Tokenizer.js';
 
-
-function checkParser(input, expectedObject) {
+function executeParser(input) {
   let tokens = new Tokenizer().tokenize(input);
   let o = new Parser().parse(tokens);
+  return o;
+}
 
+function checkParser(input, expectedObject) {
+  let o = executeParser(input);
   assert.strictEqual(JSON.stringify(o), JSON.stringify(expectedObject));
+}
+
+function checkParserFails(input) {
+  try {
+    executeParser(input);
+  } catch (e) {
+    return;
+  }
+  assert.fail("Syntax error was not detected")
 }
 
 createSuite(import.meta.url, parserSuite);
 
 export function parserSuite() {
   describe('Parser', () => {
+
+    it('detect wrong inbitial magic token', () => {
+      checkParserFails('WrongMagixToken something');
+    });
+
+    it('detect missing expected valueToken', () => {
+      checkParserFails('EU4txt = ');
+    });
+
+    it('detect syntax error - separator token expected', () => {
+       checkParserFails('EU4txt value1 value2');
+    });
+
+    it('detect unexpected end-of-file', () => {
+       checkParserFails('EU4txt a = ');
+    });
+
+    it('detect unexpected end-of-file nested', () => {
+       checkParserFails('EU4txt a = { b =');
+    });
+
+    it('detect unexpected end-of-file nested 2', () => {
+       checkParserFails('EU4txt a = {=');
+    });
+
+    it('detect unexpected end-of-file nested 2', () => {
+       checkParserFails('EU4txt a ==');
+    });
 
     it('parses simple attribute', () => {
       let input = 'EU4txt date=1570.9.1  end=x';

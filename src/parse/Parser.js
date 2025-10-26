@@ -12,10 +12,11 @@ export class Parser {
 
   #checkFormatInfo(tb) {
     const expected = "EU4txt";
-    let value = tb.consumeToken().getObject();
+    let token = tb.consumeToken();
+    let value = token.getObject();
 
     if (value.toLowerCase() != expected.toLowerCase()) {
-      throw `ERROR: File starts with "${value}" instead of "${expected}"`;
+      throw `ERROR: ${token.getPosition().toString()} File starts with "${value}" instead of "${expected}"`;
     }
   }
 
@@ -34,7 +35,7 @@ export class Parser {
           continue;
         }
 
-        throw `Error: Value token expected`;
+        throw `Error: ${keyToken.getPosition().toString()} Value token expected`;
       }
 
       let separatorToken = tb.consumeToken();
@@ -47,7 +48,7 @@ export class Parser {
         rightToken = separatorToken;
       } else {
         if (!separatorToken.isSeparatorToken()) {
-          throw `Erorr: Separator token expected`;
+          throw `Erorr: ${separatorToken.getPosition().toString()} Separator token expected`;
         }
 
         rightToken = tb.consumeToken();
@@ -60,7 +61,7 @@ export class Parser {
       let value = this.#parseAnyRightHandside(tb, rightToken, `breadcrumb / ${key}`);
 
       if (value == null) {
-        throw `ERROR: unable to parse token: "${rightToken}"`
+        throw `ERROR: ${keyToken.getPosition().toString()} unable to parse token: "${rightToken}"`
       }
 
       o[key] = value;
@@ -106,8 +107,9 @@ export class Parser {
   }
 
   #tryParseArray(tb, rightToken, breadcrumb) {
+    let peek = tb.peekToken();
     let peek1 = tb.peekToken(1);
-    if (!rightToken.isBlockStartToken() || peek1.isSeparatorToken()) {
+    if (!rightToken.isBlockStartToken() || peek1?.isSeparatorToken() || peek?.isSeparatorToken()) {
       return null;
     }
 

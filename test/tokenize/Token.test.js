@@ -6,6 +6,9 @@ import { BlockEndToken } from '../../src/tokenize/token/BlockEndToken.js';
 import { ValueToken } from '../../src/tokenize/token/ValueToken.js';
 import { SeparatorToken } from '../../src/tokenize/token/SeparatorToken.js';
 import { BlockStartToken } from '../../src/tokenize/token/BlockStartToken.js';
+import { AbstractToken } from '../../src/tokenize/token/AbstractToken.js';
+import { TokenType } from '../../src/tokenize/consts/TokenType.js';
+import { Position } from '../../src/tokenize/Position.js';
 
 function checkToken(token, expectedString, expectedObject){
   assert.deepStrictEqual(token.toString(), expectedString);
@@ -16,6 +19,15 @@ createSuite(import.meta.url, tokenSuite);
 
 export function tokenSuite() {
   describe('Token', () => {
+
+    it('AbstractToken subclasses must implement getObject()', () => {
+      try {
+        new AbstractToken(TokenType.VALUE, new Position(1,1)).getObject();
+        assert.fail("AbstractToken.getObject() did not fail as expected")
+      }catch(e) {
+        // OK  - intentionally empty
+      }
+    });
 
     it('BlockEndToken implements abstract methods', () => {
       checkToken(new BlockEndToken(), "}", "}")
