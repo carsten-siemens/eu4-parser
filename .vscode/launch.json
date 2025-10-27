@@ -98,6 +98,14 @@
       "args": ["--test", "test/parse/TokenBuffer.test.js"],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Test Perfomance",
+      "args": ["--test", "test/performance/Performance.test.js"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
     }
   ]
 }

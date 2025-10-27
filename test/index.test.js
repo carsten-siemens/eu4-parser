@@ -7,6 +7,7 @@ import { tokenSuite } from './tokenize/Token.test.js';
 import { fileUtilSuite } from './utils/FileUtil.test.js';
 import { parserManagerSuite } from './parse/ParserManager.test.js';
 import { tokenBufferSuite } from './parse/TokenBuffer.test.js';
+import { performanceSuite } from './performance/Performance.test.js'
 
 test('Package UTILS', () => {
   fileUtilSuite();
@@ -24,4 +25,7 @@ test('Package PARSE', () => {
   parserManagerSuite();
 });
 
+test('Performance', () => {
+  performanceSuite();
+});
 
