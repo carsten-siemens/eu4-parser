@@ -499,6 +499,9 @@ var AbstractToken = class {
   isSeparatorToken() {
     return this.getTokenType() == TokenType.SEPARATOR;
   }
+  getPosition() {
+    return this.position;
+  }
 };
 
 // src/tokenize/token/BlockEndToken.js
@@ -565,6 +568,9 @@ var Position = class {
   constructor(line = 1, column = 1) {
     this.line = line;
     this.column = column;
+  }
+  toString() {
+    return `(${this.line}, ${this.column})`;
   }
 };
 
@@ -713,9 +719,10 @@ var Parser = class {
   }
   #checkFormatInfo(tb) {
     const expected = "EU4txt";
-    let value = tb.consumeToken().getObject();
+    let token = tb.consumeToken();
+    let value = token.getObject();
     if (value.toLowerCase() != expected.toLowerCase()) {
-      throw `ERROR: File starts with "${value}" instead of "${expected}"`;
+      throw `ERROR: ${token.getPosition().toString()} File starts with "${value}" instead of "${expected}"`;
     }
   }
   #parseAny(tb, o, breadcrumb) {
@@ -726,7 +733,7 @@ var Parser = class {
           tb.consumeToken();
           continue;
         }
-        throw `Error: Value token expected`;
+        throw `Error: ${keyToken.getPosition().toString()} Value token expected`;
       }
       let separatorToken = tb.consumeToken();
       let rightToken = null;
@@ -734,7 +741,7 @@ var Parser = class {
         rightToken = separatorToken;
       } else {
         if (!separatorToken.isSeparatorToken()) {
-          throw `Erorr: Separator token expected`;
+          throw `Erorr: ${separatorToken.getPosition().toString()} Separator token expected`;
         }
         rightToken = tb.consumeToken();
         if (!rightToken) {
@@ -744,7 +751,7 @@ var Parser = class {
       let key = keyToken.getObject();
       let value = this.#parseAnyRightHandside(tb, rightToken, `breadcrumb / ${key}`);
       if (value == null) {
-        throw `ERROR: unable to parse token: "${rightToken}"`;
+        throw `ERROR: ${keyToken.getPosition().toString()} unable to parse token: "${rightToken}"`;
       }
       o[key] = value;
     }
@@ -772,8 +779,9 @@ var Parser = class {
     return result;
   }
   #tryParseArray(tb, rightToken, breadcrumb) {
+    let peek = tb.peekToken();
     let peek1 = tb.peekToken(1);
-    if (!rightToken.isBlockStartToken() || peek1.isSeparatorToken()) {
+    if (!rightToken.isBlockStartToken() || peek1?.isSeparatorToken() || peek?.isSeparatorToken()) {
       return null;
     }
     let arr = [];
@@ -824,6 +832,18 @@ var ParserManager = class {
 };
 
 // src/index.js
+/*!
+ * Parse a - zip or plain text - Europa Universali (EU4) save game file
+ * into a nested JavaScript object.
+ * 
+ * @param {*} filePath path to the zipped - or unzpped - save game file  
+ * @param {*} encoding optional: encoding of either 
+ *    (a) the text files with in the zip archive or
+ *    (b) the plain text save game file
+ * EU4 always uses the encoding latin1 (aka WINDOWS-1252). Therefor, this
+ * opttional encoding parameter shoul be left out unless you have 
+ * an encoding issue.
+ */
 function parseEu4Savegame(filePath, encoding = "latin1") {
   return new ParserManager().parseFile(filePath, encoding);
 }

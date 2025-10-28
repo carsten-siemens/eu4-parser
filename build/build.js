@@ -6,7 +6,8 @@ await build({
   format: 'esm',
   bundle: true,
   platform: "node",
-  external: ['fs']  
+  external: ['fs'],
+  legalComments: 'inline'
 });
 
 await build({
@@ -15,5 +16,6 @@ await build({
   format: 'cjs',
   bundle: true,
   platform: "node",
-  external: ['fs']  
+  external: ['fs'],
+  legalComments: 'inline'
 });

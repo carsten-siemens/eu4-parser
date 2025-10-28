@@ -1,6 +1,6 @@
 import { ParserManager } from "./parse/ParserManager";
 
-/**
+/*!
  * Parse a - zip or plain text - Europa Universali (EU4) save game file
  * into a nested JavaScript object.
  * 
