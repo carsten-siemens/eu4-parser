@@ -3,6 +3,7 @@ import { BlockStartToken } from "./token/BlockStartToken.js";
 import { SeparatorToken } from "./token/SeparatorToken.js";
 import { ValueToken } from "./token/ValueToken.js";
 import { StringBuffer } from "./StringBuffer.js";
+import { TokenBuffer } from "../parse/TokenBuffer.js";
 
 const WHITESPACES = "\t \r\n";
 const PUNCTUATORS = "={}";
@@ -22,7 +23,7 @@ export class Tokenizer {
 
   tokenize(input) {
     let sb = new StringBuffer(input);
-    let tb = [];
+    let tb = new TokenBuffer()
 
     for (this.#consumeWhitespace(sb); sb.hasChars(); this.#consumeWhitespace(sb)) {
       let c = sb.consumeChar();

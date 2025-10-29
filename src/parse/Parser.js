@@ -1,9 +1,6 @@
-import { TokenBuffer } from "./TokenBuffer.js";
-
 export class Parser {
 
-  parse(tokens, o={}) {
-    let tb = new TokenBuffer(tokens);
+  parse(tb, o={}) {
     this.#checkFormatInfo(tb);
     this.#parseAny(tb, o, []);
 

@@ -7,13 +7,6 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch",
-      "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}/src/main.js"
-    },
-    {
-      "type": "node",
-      "request": "launch",
       "name": "Run Test Suite",
       "runtimeArgs": ["--test", "--experimental-test-coverage", "test/index.test.js"],
       "console": "integratedTerminal",
@@ -46,30 +39,6 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Test class StringBuffer",
-      "args": ["--test", "test/tokenize/StringBuffer.test.js"],
-      "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen"
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Test classes ...Token",
-      "args": ["--test", "test/tokenize/Token.test.js"],
-      "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen"
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Test class Tokenizer",
-      "args": ["--test", "test/tokenize/Tokenizer*.js"],
-      "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen"
-    },
-    {
-      "type": "node",
-      "request": "launch",
       "name": "Test class FileUtil",
       "args": ["--test", "test/utils/FileUtil.test.js"],
       "console": "integratedTerminal",
@@ -94,6 +63,30 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "Test class StringBuffer",
+      "args": ["--test", "test/tokenize/StringBuffer.test.js"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Test classes ...Token",
+      "args": ["--test", "test/tokenize/Token.test.js"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Test class Tokenizer",
+      "args": ["--test", "test/tokenize/Tokenizer*.js"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Test class TokenBuffer",
       "args": ["--test", "test/parse/TokenBuffer.test.js"],
       "console": "integratedTerminal",
@@ -103,7 +96,7 @@
       "type": "node",
       "request": "launch",
       "name": "Test Perfomance",
-      "args": ["--test", "test/performance/Performance.test.js"],
+      "args": ["--inspect", "test/performance/Performance.test.js"],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"
     }

@@ -9,10 +9,13 @@ simulate upload
 - npm pack --pack-destination c:\temp\eu4-parser-pack => eu4-parser-&lt;version&gt;.tgz
 
 ## Steps on ESM und CJS test consumers
-- dependecy "eu4-parser": "file:/temp/eu4-parser-pack/ eu4-parser-&lt;version&gt;.tgz" 
+- dependency "eu4-parser": "file:/temp/eu4-parser-pack/ eu4-parser-&lt;version&gt;.tgz" 
 - npm install
 - node index.js
-- commit changes and create tag
+
+
+## Commit & push
+- commit & push changes and create tag
 
 ## Create releaseon github
 - use interactive dialog

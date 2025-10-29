@@ -1,23 +1,55 @@
 export class TokenBuffer {
-  constructor(tokens) {
-    this.tokens = tokens;
-    this.i = 0;
+  constructor() {
+    this.head = null;
+    this.cursor = null;
+    this.tail = null;  
+  }
+
+  push(data) {
+    const node = { data: data, next: null};
+
+    if (this.head) {
+      this.tail.next = node;
+    } else {
+      this.head = node;
+      this.cursor = node;
+    }
+ 
+    this.tail = node;
   }
 
   hasTokens() {
-    return this.i < this.tokens.length;
+    return this.cursor != null
   }
 
   peekToken(offset = 0) {
-    let index = this.i + offset;
-    return index < this.tokens.length
-      ? this.tokens[index]
+    let tempCursor = this.cursor;
+
+    for(let i=0; tempCursor && (i < offset); i++) {
+      tempCursor = tempCursor.next;
+    }
+    
+    return tempCursor 
+      ? tempCursor.data 
       : null;
   }
 
   consumeToken() {
-    return this.hasTokens()
-      ? this.tokens[this.i++]
-      : null;
+    if (this.cursor) {
+      let data =  this.cursor.data;
+      this.cursor = this.cursor.next;
+
+      return data;
+    }
+
+    return null;
+  }
+
+  *[Symbol.iterator]() {
+    let current = this.head;
+    while (current) {
+      yield current.data;
+      current = current.next;
+    }
   }
 }

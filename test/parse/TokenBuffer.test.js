@@ -6,12 +6,12 @@ import { TokenBuffer } from '../../src/parse/TokenBuffer.js';
 import { ValueToken } from '../../src/tokenize/token/ValueToken.js';
 
 function createTokenBuffer(numberOfTokens){
-  let tokens = [];
+  let tb = new TokenBuffer();
   for(let i= 0; i < numberOfTokens; i++){
-    tokens.push(new ValueToken(i));
+    tb.push(new ValueToken(i));
   }
 
-  return new TokenBuffer(tokens);
+  return tb;
 }
 
 createSuite(import.meta.url, tokenBufferSuite);
@@ -19,14 +19,16 @@ export function tokenBufferSuite() {
   describe("TokenBuffer", () => {
 
     it('hasToken() works before token consumption', () => {
-      assert.deepStrictEqual(new TokenBuffer([]).hasTokens(), false);
-      assert.deepStrictEqual(new TokenBuffer([new ValueToken("abc")]).hasTokens(), true);
+      assert.deepStrictEqual(createTokenBuffer(0).hasTokens(), false);
+      assert.deepStrictEqual(createTokenBuffer(1).hasTokens(), true);
+      assert.deepStrictEqual(createTokenBuffer(2).hasTokens(), true);
     });
 
     it('hasToken() works during token consumption', () => {
-      let tb = createTokenBuffer(5);
+      let len = 5;
+      let tb = createTokenBuffer(len);
 
-      for(let i=tb.tokens.length; i > 0; i--){
+      for(let i=0; i < len; i++){
         assert.deepStrictEqual(tb.hasTokens(), true);
         tb.consumeToken();
       }
@@ -35,30 +37,32 @@ export function tokenBufferSuite() {
     });
 
 
-    it('peakChar() works on empty token buffer', () => {
-      let tb = new TokenBuffer([]);
+    it('peakToken() works on empty token buffer', () => {
+      let tb = createTokenBuffer(0);
       assert.deepStrictEqual(tb.peekToken(), null);
-      assert.deepStrictEqual(tb.i, 0);
+      assert.deepStrictEqual(tb.peekToken(), null);
     });
 
-    it('peakChar() works on non-empty token buffer', () => {
-      let tb = createTokenBuffer(3);
-      for(let i=0; i < tb.tokens.length; i++){
+    it('peakToken() works on non-empty token buffer', () => {
+      let len = 3;
+      let tb = createTokenBuffer(len);
+      for(let i=0; i < len; i++){
         assert.deepStrictEqual(tb.peekToken().getObject(), i);
         assert.deepStrictEqual(tb.peekToken().getObject(), i);
         assert.deepStrictEqual(tb.consumeToken().getObject(), i);
       }
     });
 
-    it('consumeChar() works on empty token buffer', () => {
-      let tb = new TokenBuffer([]);
+    it('consumeToken() works on empty token buffer', () => {
+      let tb = createTokenBuffer(0);
       assert.deepStrictEqual(tb.consumeToken(), null);
-      assert.deepStrictEqual(tb.i, 0);
+      assert.deepStrictEqual(tb.consumeToken(), null);
     });
 
-    it('consumeChar() works on non-empty token buffer', () => {
-      let tb = createTokenBuffer(3);
-      for(let i=0; i < tb.tokens.length; i++){
+    it('consumeToken() works on non-empty token buffer', () => {
+      let len = 3;
+      let tb = createTokenBuffer(len);
+      for(let i=0; i < len; i++){
         assert.deepStrictEqual(tb.consumeToken().getObject(), i);
       }
     });

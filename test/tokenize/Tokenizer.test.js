@@ -5,8 +5,8 @@ import { createSuite } from '../createSuite.js';
 import { Tokenizer } from '../../src/tokenize/Tokenizer.js';
 
 function checkTokenize(input, expectedTokenStrings){
-  let tokens = new Tokenizer().tokenize(input);
-  let tokenStrings = tokens.map(x => x.toString());
+  let tb = new Tokenizer().tokenize(input);
+  let tokenStrings = [...tb].map(x => x.toString());
 
   assert.deepStrictEqual(tokenStrings, expectedTokenStrings);
 }

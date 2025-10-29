@@ -641,6 +641,50 @@ var StringBuffer = class {
   }
 };
 
+// src/parse/TokenBuffer.js
+var TokenBuffer = class {
+  constructor() {
+    this.head = null;
+    this.cursor = null;
+    this.tail = null;
+  }
+  push(data) {
+    const node = { data, next: null };
+    if (this.head) {
+      this.tail.next = node;
+    } else {
+      this.head = node;
+      this.cursor = node;
+    }
+    this.tail = node;
+  }
+  hasTokens() {
+    return this.cursor != null;
+  }
+  peekToken(offset = 0) {
+    let tempCursor = this.cursor;
+    for (let i = 0; tempCursor && i < offset; i++) {
+      tempCursor = tempCursor.next;
+    }
+    return tempCursor ? tempCursor.data : null;
+  }
+  consumeToken() {
+    if (this.cursor) {
+      let data = this.cursor.data;
+      this.cursor = this.cursor.next;
+      return data;
+    }
+    return null;
+  }
+  *[Symbol.iterator]() {
+    let current = this.head;
+    while (current) {
+      yield current.data;
+      current = current.next;
+    }
+  }
+};
+
 // src/tokenize/Tokenizer.js
 var WHITESPACES = "	 \r\n";
 var PUNCTUATORS = "={}";
@@ -656,7 +700,7 @@ var Tokenizer = class {
   }
   tokenize(input) {
     let sb = new StringBuffer(input);
-    let tb = [];
+    let tb = new TokenBuffer();
     for (this.#consumeWhitespace(sb); sb.hasChars(); this.#consumeWhitespace(sb)) {
       let c = sb.consumeChar();
       let position = sb.getPosition();
@@ -726,28 +770,9 @@ var FileUtil = class _FileUtil {
   }
 };
 
-// src/parse/TokenBuffer.js
-var TokenBuffer = class {
-  constructor(tokens) {
-    this.tokens = tokens;
-    this.i = 0;
-  }
-  hasTokens() {
-    return this.i < this.tokens.length;
-  }
-  peekToken(offset = 0) {
-    let index = this.i + offset;
-    return index < this.tokens.length ? this.tokens[index] : null;
-  }
-  consumeToken() {
-    return this.hasTokens() ? this.tokens[this.i++] : null;
-  }
-};
-
 // src/parse/Parser.js
 var Parser = class {
-  parse(tokens, o = {}) {
-    let tb = new TokenBuffer(tokens);
+  parse(tb, o = {}) {
     this.#checkFormatInfo(tb);
     this.#parseAny(tb, o, []);
     return o;
