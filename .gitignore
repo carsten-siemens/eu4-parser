@@ -2,3 +2,4 @@
 .vscode/extensions.json
 /data
 /node_modules
+/doc

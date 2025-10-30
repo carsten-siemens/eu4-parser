@@ -11,7 +11,7 @@ npm install eu4-parser
 
 ## Features
 
-- Converts EU4 save game data into a navigable JavaScript object
+- Converts EU4 save game file into a navigable JavaScript object
 - Parses compressed as well as uncompressed save games files (.eu4)
 - Makes alle meta data and gamestate data accessible - e.g. like provinces, countries, diplomacy, armies, events
 - Can be used via ESM and CJS import
@@ -22,7 +22,7 @@ ESM
 ```js
 import { parseEu4Savegame } from 'eu4-parser';
 
-const savegame = parseEu4Savegame(pathToSavegameFile);
+const savegameObject = parseEu4Savegame(pathToSavegameFile);
 console.log(JSON.stringify(savegame));
 ```
 
@@ -30,8 +30,8 @@ CJS
 ```js
 const { parseEu4Savegame } = require('eu4-parser');
 
-const result = parseEu4Savegame(pathToSavegameFile);
-console.log(JSON.stringify(savegame));
+const savegameObject = parseEu4Savegame(pathToSavegameFile);
+console.log(JSON.stringify(savegameObject));
 ```
 
 
